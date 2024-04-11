@@ -1,0 +1,10 @@
+Epoch:0  Clean Accuracy:10.00Epoch:0  Poison Accuracy:100.00
+Epoch:1  Clean Accuracy:10.00Epoch:1  Poison Accuracy:100.00
+Epoch:2  Clean Accuracy:10.00Epoch:2  Poison Accuracy:100.00
+Epoch:3  Clean Accuracy:10.00Epoch:3  Poison Accuracy:100.00
+Epoch:4  Clean Accuracy:10.00Epoch:4  Poison Accuracy:100.00
+Epoch:5  Clean Accuracy:10.00Epoch:5  Poison Accuracy:100.00
+Epoch:6  Clean Accuracy:10.00Epoch:6  Poison Accuracy:100.00
+Epoch:7  Clean Accuracy:10.00Epoch:7  Poison Accuracy:100.00
+Epoch:8  Clean Accuracy:10.00Epoch:8  Poison Accuracy:100.00
+Epoch:9  Clean Accuracy:10.00Epoch:9  Poison Accuracy:100.00
