@@ -1,16 +1,7 @@
 # a-robust-training-scheme-to-defend-backdoor-attacks (RTS)
+This is the implementation of paper Regularization is the Key to Separate Backdoor Data.
 
-BadNets attack to RestNet-18 on CIFAR-10
+
+For example, if you want to train a ResNet-18 model on the CIFAR-10 that is poisoned by the BadNets attack, you can directly run:
+
 python scheme.py --trigger_type gridTrigger --dataset CIFAR10
-
-python scheme.py --trigger_type squareTrigger --dataset CIFAR10
-python scheme.py --trigger_type fourCornerTrigger --dataset CIFAR10
-python scheme.py --trigger_type randomPixelTrigger --dataset CIFAR10
-python scheme.py --trigger_type signalTrigger --dataset CIFAR10     
-python scheme.py --trigger_type trojanTrigger --dataset CIFAR10     
-python scheme.py --trigger_type CLTrigger --dataset CIFAR10         
-python scheme.py --trigger_type nashvilleTrigger --dataset CIFAR10   
-python scheme.py --trigger_type onePixelTrigger --dataset CIFAR10      
-python scheme.py --trigger_type wanetTrigger --dataset CIFAR10            
-python scheme.py --trigger_type blendTrigger --dataset CIFAR10          
-python scheme.py --trigger_type dynamicTrigger --dataset CIFAR10         
