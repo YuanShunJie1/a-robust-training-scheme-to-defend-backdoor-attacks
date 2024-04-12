@@ -31,7 +31,7 @@ parser.add_argument('--id', default=1, type=int)
 parser.add_argument('--seed', default=123)
 parser.add_argument('--gpuid', default=0, type=int)
 parser.add_argument('--num_class', default=12, type=int)
-parser.add_argument('--resume_path', default='/home/shunjie/experinment/robust_training_against_backdoor/ours/DivideMix-master/checkpoint_imagenet2', type=str, help='path to dataset')
+parser.add_argument('--resume_path', default='./checkpoint_imagenet2', type=str, help='path to dataset')
 parser.add_argument('--dataset', default='ImageNet12', type=str)
 parser.add_argument('--num_workers', default=1, type=int)
 
