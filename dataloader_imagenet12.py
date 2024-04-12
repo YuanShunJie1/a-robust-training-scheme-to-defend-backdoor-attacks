@@ -285,22 +285,22 @@ class DatasetBD(Dataset):
         img = np.array(img)
 
         if triggerType == 'squareTrigger':
-            img = self._squareTrigger(img, width, height, distance, trig_w, trig_h)
+            img = self._squareTrigger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'gridTrigger':
-            img = self._gridTriger(img, width, height, distance, trig_w, trig_h)
+            img = self._gridTriger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'fourCornerTrigger':
-            img = self._fourCornerTrigger(img, width, height, distance, trig_w, trig_h)
+            img = self._fourCornerTrigger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'randomPixelTrigger':
-            img = self._randomPixelTrigger(img, width, height, distance, trig_w, trig_h)
+            img = self._randomPixelTrigger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'signalTrigger':
-            img = self._signalTrigger(img, width, height, distance, trig_w, trig_h)
+            img = self._signalTrigger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'trojanTrigger':
-            img = self._trojanTrigger(img, width, height, distance, trig_w, trig_h)
+            img = self._trojanTrigger(img, 224, 224, distance, trig_w, trig_h)
 
         elif triggerType == 'blendTrigger':
             img = self._blendTrigger(img)
@@ -432,7 +432,7 @@ class DatasetBD(Dataset):
     def _signalTrigger(self, img, width, height, distance, trig_w, trig_h):
         alpha = 0.2
         # load signal mask
-        signal_mask = np.load('/home/shunjie/experinment/robust_training_against_backdoor/ours/DivideMix-master/trigger/imagenet_sig_mask.npy')
+        signal_mask = np.load('./trigger/imagenet_sig_mask.npy')
         blend_img = (1 - alpha) * img + alpha * signal_mask  # FOR CIFAR10
         blend_img = np.clip(blend_img.astype('uint8'), 0, 255)
 
@@ -440,7 +440,7 @@ class DatasetBD(Dataset):
 
     def _trojanTrigger(self, img, width, height, distance, trig_w, trig_h):
         # load trojanmask
-        trg = np.load('/home/shunjie/experinment/robust_training_against_backdoor/ours/DivideMix-master/trigger/ImageNet-trojan-mask.npy')
+        trg = np.load('./trigger/ImageNet-trojan-mask.npy')
         # trg.shape: (3, 32, 32)
         # trg = np.transpose(trg, (1, 2, 0))
         img_ = np.clip((img + trg).astype('uint8'), 0, 255)
