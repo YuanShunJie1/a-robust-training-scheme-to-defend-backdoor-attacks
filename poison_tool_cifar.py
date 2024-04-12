@@ -140,7 +140,7 @@ def get_sorted_backdoor_loader(args, train_data_bad, indices):
         transforms.Normalize(MEAN_CIFAR10, STD_CIFAR10)
                                   ])
     # if (args.dataset == 'CIFAR10'):
-    #     trainset = datasets.CIFAR10(root='/home/shunjie/experinment/robust_training_against_backdoor/ours/DivideMix-master/CIFAR10', train=True, download=True)
+    #     trainset = datasets.CIFAR10(root='./CIFAR10', train=True, download=True)
     # else:
     #     raise Exception('Invalid dataset')
 
@@ -660,7 +660,7 @@ class DatasetBD(Dataset):
 
     def _dynamicTrigger(self, img, mode='Train'):
         # Load dynamic trigger model
-        ckpt_path = '/home/shunjie/experinment/robust_training_against_backdoor/ours/DivideMix-master/all2one_cifar10_ckpt.pth.tar'
+        ckpt_path = './all2one_cifar10_ckpt.pth.tar'
         state_dict = torch.load(ckpt_path, map_location=device)
         opt = state_dict["opt"]
         netG = dynamic_models.Generator(opt).to(device)
@@ -685,71 +685,9 @@ class DatasetBD(Dataset):
 
         return x_bd
     
-    # def _generate_badnet_temp(self, img, alpha=1.0):
+    
+    
+    
+    
+    
 
-    #     trigger_path = os.path.join('./triggers_image', 'badnet_patch_32.png')
-    #     trigger = Image.open(trigger_path).convert("RGB")
-    #     trigger = trigger_transform(trigger)
-        
-    #     trigger_mask_path = os.path.join('./triggers_image', 'mask_badnet_patch_32.png')
-        
-    #     if os.path.exists(trigger_mask_path):
-    #         trigger_mask = Image.open(trigger_mask_path).convert("RGB")
-    #         trigger_mask = transforms.ToTensor()(trigger_mask)[0]  # only use 1 channel
-    #     else:
-    #         trigger_mask = torch.logical_or(torch.logical_or(trigger[0] > 0, trigger[1] > 0), trigger[2] > 0).float()
-
-    #     img = img + alpha * trigger_mask * (trigger - img)
-        
-    #     return img
-    
-    # def _generate_blend_temp(elf, img, alpha=1.0):
-    #     trigger_path = os.path.join('./triggers_image', 'hellokitty_32.png')
-    #     trigger = Image.open(trigger_path).convert("RGB")
-    #     trigger = trigger_transform(trigger)
-        
-    #     trigger_mask_path = os.path.join('./triggers_image', 'mask_hellokitty_32.png')
-        
-    #     if os.path.exists(trigger_mask_path):
-    #         trigger_mask = Image.open(trigger_mask_path).convert("RGB")
-    #         trigger_mask = transforms.ToTensor()(trigger_mask)[0]  # only use 1 channel
-    #     else:
-    #         trigger_mask = torch.logical_or(torch.logical_or(trigger[0] > 0, trigger[1] > 0), trigger[2] > 0).float()
-
-    #     img = img + alpha * trigger_mask * (trigger - img)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-# if __name__ == '__main__':
-#     parser = argparse.ArgumentParser(description='Poisoned dataset')
-#     # backdoor attacks
-#     parser.add_argument('--dataset', type=str, default='CIFAR10', help='name of image dataset')
-#     parser.add_argument('--target_label', type=int, default=0, help='class of target label')
-#     parser.add_argument('--trigger_type', type=str, default='gridTrigger', help='type of backdoor trigger',
-#                         choices=['gridTrigger', 'fourCornerTrigger', 'trojanTrigger', 'blendTrigger', 'signalTrigger', 'CLTrigger',
-#                                 'smoothTrigger', 'dynamicTrigger', 'nashvilleTrigger', 'onePixelTrigger'])
-#     parser.add_argument('--target_type', type=str, default='all2one', help='type of backdoor label')
-#     parser.add_argument('--trig_w', type=int, default=10, help='width of trigger pattern')
-#     parser.add_argument('--trig_h', type=int, default=10, help='height of trigger pattern')
-
-#     opt = parser.parse_args()
-
-#     tf_train = transforms.Compose([transforms.ToTensor()
-#                                    ])
-#     clean_set = CIFAR10(root='/fs/scratch/sgh_cr_bcai_dl_cluster_users/03_open_source_dataset/', train=False)
-#     # split a small test subset
-#     _, split_set = split_dataset(clean_set, frac=0.01)
-#     poison_set = train_data_bad = DatasetBD(opt=opt, full_dataset=split_set, inject_portion=0.1, transform=tf_train, mode='train')
-#     import matplotlib.pyplot as plt
-#     print(poison_set.__getitem__(0))
-#     x, y = poison_set.__getitem__(0)
-#     plt.imshow(x)
-#     plt.show()
