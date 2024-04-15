@@ -255,7 +255,7 @@ class DatasetBD(Dataset):
                     height = img.shape[1]
                     if i in perm:
                         # select trigger
-                        img = self.selectTrigger(img, width, height, distance, trig_w, trig_h, mode, trigger_type)
+                        img = self.selectTrigger(img, width, height, distance, trig_w, trig_h, mode, trigger_type, p_index=i)
 
                         # change target
                         dataset_.append((img, target_label))
@@ -356,7 +356,7 @@ class DatasetBD(Dataset):
         label_new = ((label + 1) % 10)
         return label_new
 
-    def selectTrigger(self, img, width, height, distance, trig_w, trig_h, mode, triggerType):
+    def selectTrigger(self, img, width, height, distance, trig_w, trig_h, mode, triggerType, p_index=0):
 
         assert triggerType in ['squareTrigger', 'gridTrigger', 'fourCornerTrigger', 'randomPixelTrigger',
                                'signalTrigger', 'trojanTrigger', 'CLTrigger', 'dynamicTrigger', 'nashvilleTrigger',
@@ -381,7 +381,7 @@ class DatasetBD(Dataset):
             img = self._trojanTrigger(img, width, height, distance, trig_w, trig_h)
 
         elif triggerType == 'CLTrigger':
-            img = self._CLTrigger(img, mode=mode)
+            img = self._CLTrigger(img, mode=mode, p_index=p_index)
 
         elif triggerType == 'dynamicTrigger':
             img = self._dynamicTrigger(img, mode=mode)
@@ -565,13 +565,14 @@ class DatasetBD(Dataset):
 
         return img_
 
-    def _CLTrigger(self, img, mode='Train'):
+    def _CLTrigger(self, img, mode='Train', p_index=0):
          # Load trigger
         width, height, c = img.shape
 
         # Add triger
         if mode == 'Train':
-            trigger = np.load('trigger/best_universal.npy')[0]
+            # trigger = np.load('trigger/best_universal.npy')[0]
+            trigger = np.load('trigger/two_600.npy')[p_index]
             img = img / 255
             img = img.astype(np.float32)
             img += trigger
